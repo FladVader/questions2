@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Questions2</string>
+    <string name="change_text">Välkommen, idiot.!</string>
+    <string name="press_button">Nästa grej!</string>
+    <string name="show_answer">Visa Svar</string>
+    <string name="add_item">Lägg till</string>
+</resources>
