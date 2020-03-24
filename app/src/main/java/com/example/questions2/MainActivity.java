@@ -278,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
         pictureDay tempPic = new pictureDay("", "", "", "");
         ImageView image = findViewById(R.id.pictureDayImg);
 
-
         for (pictureDay pic: pictureDays) {
 
             if (edit.getText().toString().equals(pic.question)){
