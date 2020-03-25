@@ -1,11 +1,16 @@
 package com.example.questions2;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Intent;
 
-import com.squareup.picasso.Picasso;
+import java.util.Random;
+
+import static com.example.questions2.MainActivity.letters;
+
 
 public class NeverEver implements card {
 
@@ -17,36 +22,28 @@ public class NeverEver implements card {
 
     }
 
+
+
     @Override
-    public void show() {
+    public void show(View view) {
 
-        /*
+        TextView edit = (TextView) view.findViewById(R.id.textBox);
+        //Random rand = new Random();
+        ImageView image = view.findViewById(R.id.pictureDayImg);
+        ImageView scott = view.findViewById(R.id.imageView);
+        ImageView mostlikely = view.findViewById(R.id.imageView_mostlikely);
 
-        TextView edit = (TextView) findViewById(R.id.textBox);
-        Button btnAnswer = findViewById(R.id.btnShowAnswer);
-        pictureDay tempPic = new pictureDay("", "", "", "");
-        ImageView image = findViewById(R.id.pictureDayImg);
+        //int randNr = rand.nextInt(letters.size());
 
-        for (pictureDay pic: pictureDays) {
+        mostlikely.setVisibility(View.GONE);
+        image.setVisibility(View.GONE);
 
-            if (edit.getText().toString().equals(pic.question)){
-                edit.setText(pic.answer);
-                tempPic = pic;
-            }
-        }
+        scott.setVisibility(View.VISIBLE);
+        edit.setBackgroundColor(Color.parseColor("#DBFF33"));
 
+        edit.setText(String.format("Jag har aldrig  %s", this.text));
+        //letters.remove(randNr);
 
-
-        btnAnswer.setVisibility(View.GONE);
-        Button btnNext = findViewById(R.id.button);
-        btnNext.setVisibility(View.VISIBLE);
-        Picasso.get().load(tempPic.url2).into(image);
-
-
-       // pictureDays.remove(tempPic);
-
-
-    */
 
     }
 }
