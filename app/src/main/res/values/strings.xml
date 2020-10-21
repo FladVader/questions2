@@ -1,7 +1,11 @@
 <resources>
+
     <string name="app_name">Questions2</string>
     <string name="change_text">Välkommen, idiot.!</string>
     <string name="press_button">Nästa grej!</string>
     <string name="show_answer">Visa Svar</string>
     <string name="add_item">Lägg till</string>
+
+    <string name="add_hint">Vad fan vill du veta</string>
+    <string name="add_btn">Lägg till</string>
 </resources>

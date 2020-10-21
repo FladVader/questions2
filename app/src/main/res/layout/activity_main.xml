@@ -29,7 +29,7 @@
         android:shadowColor="#00CA1B1B"
         android:soundEffectsEnabled="true"
         android:text="@string/change_text"
-        android:textAlignment="center"
+
         android:textColor="#0E0D0D"
         android:textSize="24sp"
         app:fontFamily="sans-serif-black"

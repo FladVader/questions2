@@ -1,21 +1,28 @@
 package com.example.questions2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,14 +36,15 @@ public class MainActivity extends AppCompatActivity {
     public static int order;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
+    public static RequestQueue requestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
-
+        requestQueue = Volley.newRequestQueue(this);
 
         next = "A";
         order = 0;
@@ -66,6 +74,36 @@ public class MainActivity extends AppCompatActivity {
 
     private void addPictureDay() {
 
+        String url ="https://questions2backend.herokuapp.com/getall/";
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONArray jsonArray = response;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject obj = jsonArray.getJSONObject(i);
+
+                        letters.add(obj.getString("name"));
+                        Log.d("TAG", "onResponse() called with: response = [" + obj + "]");
+
+
+                        newPictureDay(obj.getString("name"), "https://i.pinimg.com/originals/e1/d3/a8/e1d3a8b86e2e9ca40cd4f27595b1ee66.jpg",
+                                obj.getString("type"), "https://i2-prod.mirror.co.uk/incoming/article1532701.ece/ALTERNATES/s615b/Gerard%20Depardieu");
+                        //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+
+/*
 
         newPictureDay("1. Lever den jäveln?", "https://i.pinimg.com/originals/e1/d3/a8/e1d3a8b86e2e9ca40cd4f27595b1ee66.jpg",
                 "Fet och glad i Ryssland!", "https://i2-prod.mirror.co.uk/incoming/article1532701.ece/ALTERNATES/s615b/Gerard%20Depardieu");
@@ -107,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 "Han knallar fortfarande på!", "https://img.memecdn.com/ian-mckellen_o_1150646.jpg");
         newPictureDay("5. Lever den jäveln?", "data:image/jpeg;base64,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",
                 "Det gör han verkligen inte...", "https://ih1.redbubble.net/image.15364073.0904/flat,128x,075,f-pad,128x128,f8f8f8.u2.jpg");
-
+*/
     }
 
     private void newPictureDay(String question, String url1, String answer, String url2){
@@ -117,6 +155,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNeverHaveiEver() {
+
+        String url ="https://questions2backend.herokuapp.com/getall/jagharaldrig/";
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONArray jsonArray = response;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject employee = jsonArray.getJSONObject(i);
+
+                        letters.add(employee.getString("statement"));
+                        Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
+
+                        //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+
+        /*
         letters.add("varit orsak till en trafikolycka");
         letters.add("blivit bestulen");
         letters.add("pratat med mina föräldrar om mitt sexliv");
@@ -158,13 +224,39 @@ public class MainActivity extends AppCompatActivity {
         letters.add("");
         letters.add("");
         letters.add("");
-
-
+*/
 
     }
 
     private void addMostLikely(){
 
+        String url ="https://nameless-sands-01228.herokuapp.com/getItems/mesttrolig/";
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONArray jsonArray = response;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject employee = jsonArray.getJSONObject(i);
+
+                        mostLikely.add(employee.getString("name"));
+                        Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
+
+                        //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request);
+
+/*
         mostLikely.add("bli politiskt aktiv?");
         mostLikely.add("göra något olagligt, 'så länge det inte skadar någon'?");
         mostLikely.add("råka göra någon annan illa?");
@@ -205,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
         mostLikely.add("");
         mostLikely.add("");
 
-
+*/
 
     }
 
@@ -366,5 +458,10 @@ public class MainActivity extends AppCompatActivity {
         edit.setBackgroundColor(Color.parseColor("#FF5733"));
         edit.setText("Vem är mest trolig att " + mostLikely.get(randNr));
         mostLikely.remove(randNr);
+    }
+
+    public static RequestQueue getRequestQueue () {
+
+        return requestQueue;
     }
 }
