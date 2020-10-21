@@ -74,22 +74,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void addPictureDay() {
 
-        String url ="https://questions2backend.herokuapp.com/getall/";
+        String url ="https://questions2backend.herokuapp.com/getall/idiotfragan/";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    JSONArray jsonArray = response;
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject obj = jsonArray.getJSONObject(i);
+                    Log.d("TAG", "onResponse() called with: respooooooooonse = [" + response + "]");
 
-                        letters.add(obj.getString("name"));
-                        Log.d("TAG", "onResponse() called with: response = [" + obj + "]");
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject obj = response.getJSONObject(i);
+                        newPictureDay(obj.getString("question"),obj.getString("url1"), obj.getString("answer"), obj.getString("url2"));
 
-
-                        newPictureDay(obj.getString("name"), "https://i.pinimg.com/originals/e1/d3/a8/e1d3a8b86e2e9ca40cd4f27595b1ee66.jpg",
-                                obj.getString("type"), "https://i2-prod.mirror.co.uk/incoming/article1532701.ece/ALTERNATES/s615b/Gerard%20Depardieu");
-                        //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -103,6 +98,31 @@ public class MainActivity extends AppCompatActivity {
         });
         requestQueue.add(request);
 
+        String url2 ="https://questions2backend.herokuapp.com/getall/leverdenjaveln/";
+        JsonArrayRequest request2 = new JsonArrayRequest(Request.Method.GET, url2, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    Log.d("TAG", "onResponse() called with: respooooooooonse = [" + response + "]");
+
+                    for (int i = 0; i < response.length(); i++) {
+                        Log.d("TAG", "onResponse() called with: responseeeeeeeee = [" + response + "]");
+                        JSONObject obj = response.getJSONObject(i);
+                        Log.d("TAG", "onResponse() called wiiiiiiiiiiith: response = [" + obj + "]");
+                        newPictureDay("Lever den jäveln?",obj.getString("url1"), obj.getString("answer"), obj.getString("url2"));
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        requestQueue.add(request2);
 /*
 
         newPictureDay("1. Lever den jäveln?", "https://i.pinimg.com/originals/e1/d3/a8/e1d3a8b86e2e9ca40cd4f27595b1ee66.jpg",
@@ -230,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addMostLikely(){
 
-        String url ="https://nameless-sands-01228.herokuapp.com/getItems/mesttrolig/";
+        String url ="https://questions2backend.herokuapp.com/getall/mesttrolig/";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -239,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject employee = jsonArray.getJSONObject(i);
 
-                        mostLikely.add(employee.getString("name"));
+                        mostLikely.add(employee.getString("statement"));
                         Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
 
                         //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
