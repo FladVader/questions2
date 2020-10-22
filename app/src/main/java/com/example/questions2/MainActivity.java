@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static RequestQueue requestQueue;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("TAG", "onResponse() called with: respooooooooonse = [" + response + "]");
 
                     for (int i = 0; i < response.length(); i++) {
-                        Log.d("TAG", "onResponse() called with: responseeeeeeeee = [" + response + "]");
+                        //Log.d("TAG", "onResponse() called with: responseeeeeeeee = [" + response + "]");
                         JSONObject obj = response.getJSONObject(i);
-                        Log.d("TAG", "onResponse() called wiiiiiiiiiiith: response = [" + obj + "]");
+                        //Log.d("TAG", "onResponse() called wiiiiiiiiiiith: response = [" + obj + "]");
                         newPictureDay("Lever den jäveln?",obj.getString("url1"), obj.getString("answer"), obj.getString("url2"));
 
                     }
@@ -123,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request2);
+
 /*
 
         newPictureDay("1. Lever den jäveln?", "https://i.pinimg.com/originals/e1/d3/a8/e1d3a8b86e2e9ca40cd4f27595b1ee66.jpg",
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject employee = jsonArray.getJSONObject(i);
 
                         letters.add(employee.getString("statement"));
-                        Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
+                     //   Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
 
                         //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
                     }
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject employee = jsonArray.getJSONObject(i);
 
                         mostLikely.add(employee.getString("statement"));
-                        Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
+//                        Log.d("TAG", "onResponse() called with: response = [" + employee + "]");
 
                         //tView.append(firstName + ", " + String.valueOf(age) + ", " + mail +"\n\n");
                     }

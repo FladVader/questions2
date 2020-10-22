@@ -20,24 +20,62 @@
         app:layout_constraintVertical_bias="0.164" />
 
     <EditText
-        android:id="@+id/input_grej"
+        android:id="@+id/input_jagharaldrig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/add_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_add_jagharaldrig"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/add_btn"
+        app:layout_constraintEnd_toEndOf="@+id/input_jagharaldrig"
+        app:layout_constraintStart_toStartOf="@+id/input_jagharaldrig"
+        app:layout_constraintTop_toBottomOf="@+id/input_jagharaldrig" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/add_mesttrolig"
+        app:layout_constraintBottom_toTopOf="@+id/input_mesttrolig"
+        app:layout_constraintStart_toStartOf="@+id/input_mesttrolig" />
+
+    <EditText
+        android:id="@+id/input_mesttrolig"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/add_btn"
+        android:ems="10"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_grej" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_jagharaldrig" />
+
+    <Button
+        android:id="@+id/btn_add_mesttrolig"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/add_btn"
+        app:layout_constraintEnd_toEndOf="@+id/input_mesttrolig"
+        app:layout_constraintStart_toStartOf="@+id/input_mesttrolig"
+        app:layout_constraintTop_toBottomOf="@+id/input_mesttrolig" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="@string/add_jagaharaldrig"
+        app:layout_constraintBottom_toTopOf="@+id/input_jagharaldrig"
+        app:layout_constraintStart_toStartOf="@+id/input_jagharaldrig" />
 </androidx.constraintlayout.widget.ConstraintLayout>

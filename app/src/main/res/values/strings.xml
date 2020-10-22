@@ -7,5 +7,7 @@
     <string name="add_item">Lägg till</string>
 
     <string name="add_hint">Vad fan vill du veta</string>
+    <string name="add_jagaharaldrig">Jag har aldrig..</string>
+    <string name="add_mesttrolig">Vem är mest trolig att...</string>
     <string name="add_btn">Lägg till</string>
 </resources>
